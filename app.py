@@ -40,16 +40,16 @@ if st.button("Generate AI response", type='primary'):
   background = "Job role :" + role+ " Difficlut level" + level
   with st.spinner("Genrating your answer..."):
       try:
-        response = client.chat.completions.create(
+        req = client.chat.completions.create(
           model = gen_model,
           messages = [{"role":"system",
                      "content":"Act as a Senior interview,both HR and Technical expert"},
                   {"role":"user",
                    "content" : background + task}],
           temperature = 0.7,
-          max_token = 1800
+          max_tokens = 1800
         )
-        output = response.choices[0].message.content
+        output = req.choices[0].message.content
         st.subheader("AI Response")
         st.markdown(output)
         st.download_button("Download Response",output, file_name = "Interview_Response.txt", mime = 'text/plain')
