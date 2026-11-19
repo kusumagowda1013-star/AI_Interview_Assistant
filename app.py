@@ -40,7 +40,7 @@ elif mode == 'Improve Answers':
     background = "Job role :" + role+ " Difficlut level" + level
     with st.spinner("Genrating your answer..."):
       try:
-        response = clint.chat.completions.create(
+        response = client.chat.completions.create(
         model = gen_model,
         messages = [{"role":"system","content":"Act as a Senior interview,both HR and Technical expert"},
                 {"role":"user",
