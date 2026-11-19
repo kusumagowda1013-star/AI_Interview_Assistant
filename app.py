@@ -49,7 +49,7 @@ elif mode == 'Improve Answers':
         temperature = 0.7,
         max_token = 1800
         )
-       output = response.choices[0].message.content
+        output = response.choices[0].message.content
         st.subheader("AI Response")
         st.markdown(output)
         st.download_button("Download Response",output, file_name = "Interview_Response.txt", mime = 'text/plain')
