@@ -9,8 +9,8 @@ try:
 except (KeyError, FileNotFoundError):
   st.error("API Key is missing. Add it in Advanced settings")
   st.stop()
-  role = st.selectbox("Job Title",['Machine Learning Engineer','AI Engineer','Senior Software Engineer','DevOps Engineer'])
-if role == "Other":
+role = st.selectbox("Job Title",['Machine Learning Engineer','AI Engineer','Senior Software Engineer','DevOps Engineer'])
+if role == 'Other':
   st.text_input('Enter your Job Title','xxxxxxxxx')
 gen_model = st.selectbox('Model',['openai/gpt-oss-120b','openai/gpt-oss-20b'])
 level = st.selectbox('Level',['Beginner','intermediate','Advance'])
@@ -23,12 +23,10 @@ elif mode == 'Generate Code Questions':
 else:
   question = st.text_area('Enter Interview Question here')
   answer = st.text_area('Enter your answer',height =160)
-  
-  if st.button("Generate AI response", type='primary'):
+ if st.button("Generate AI response", type='primary'):
     if mode == ['Evalute Answer', 'Improve Answers'] and(not question.strip() or not answer.strip()):
       st.warning("Please enter a valid Question and Answer")
       st.stop()
-      
     if mode == 'Generate Questions':
       task = "Genarate" + str(count) + " Frequency asked Interview Question 3 theory and 2 scenario questions. Do not give answers, Gits Hints."
     elif mode == 'Genarate Code Questions':
@@ -40,15 +38,15 @@ else:
   background = "Job role :" + role+ " Difficlut level" + level
   with st.spinner("Genrating your answer..."):
     try:
-        req = client.chat.completions.create(
+      req = client.chat.completions.create(
           model = gen_model,
+        
           messages = [{"role":"system",
                      "content":"Act as a Senior interview,both HR and Technical expert"},
                   {"role":"user",
                    "content" : background +task}],
           temperature = 0.7,
-          max_tokens = 1000
-        )
+          max_tokens = 1000 )
         output = req.choices[0].message.content
         st.subheader("AI Response")
         st.markdown(output)
@@ -56,6 +54,6 @@ else:
     except Exception as e:
        st.error("API connenction was unsuccessful: ",e)
        st.info("Please check your API Key and rate limits") 
-  st.caption("Powered by streamlit.io and Github. Using LLM API")
+st.caption("Powered by streamlit.io and Github. Using LLM API")
 
               
