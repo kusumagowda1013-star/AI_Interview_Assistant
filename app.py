@@ -42,16 +42,17 @@ elif mode == 'Improve Answers':
       try:
         response = client.chat.completions.create(
         model = gen_model,
-        messages = [{"role":"system","content":"Act as a Senior interview,both HR and Technical expert"},
+        messages = [{"role":"system",
+                     "content":"Act as a Senior interview,both HR and Technical expert"},
                 {"role":"user",
                  "content" : background + task}],
         temperature = 0.7,
-        max_token = 1800)
-        output = response.choices[0].message.content
+        max_token = 1800
+        )
+       output = response.choices[0].message.content
         st.subheader("AI Response")
         st.markdown(output)
         st.download_button("Download Response",output, file_name = "Interview_Response.txt", mime = 'text/plain')
-  
       except Exception as e:
        st.error("API connenction was unsuccessful: ",e)
        st.info("Please check your API Key and rate limits") 
