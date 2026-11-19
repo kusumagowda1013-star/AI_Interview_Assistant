@@ -26,8 +26,9 @@ else:
   
   if st.button("Generate AI response", type='primary'):
     if mode == ['Evalute Answer', 'Improve Answers'] and(not question.strip() or not answer.strip()):
-    st.warning("Please enter a valid Question and Answer")
-    st.stop()
+      st.warning("Please enter a valid Question and Answer")
+      st.stop()
+      
     if mode == 'Generate Questions':
       task = "Genarate" + str(count) + " Frequency asked Interview Question 3 theory and 2 scenario questions. Do not give answers, Gits Hints."
     elif mode == 'Genarate Code Questions':
@@ -46,7 +47,7 @@ else:
                   {"role":"user",
                    "content" : background +task}],
           temperature = 0.7,
-          max_tokens = 1800
+          max_tokens = 1000
         )
         output = req.choices[0].message.content
         st.subheader("AI Response")
